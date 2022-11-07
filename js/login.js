@@ -34,7 +34,7 @@ const myaction = {
         document.querySelector(".progress-bar").innerHTML =
           "Working" + percent + "%";
       });
-      ajax.open("post", "./php/login.php", true);//**********
+      ajax.open("post", "./php/login.php", true);
       ajax.send(form);
     },
     handle_result:function(result){
@@ -43,7 +43,7 @@ const myaction = {
       if(obj.success)
       {
           alert("User Login Successfully !!");
-          window.location.href= 'http://localhost:8080/LoginPage/profilehtml.php';//********
+          window.location.href= 'http://localhost:8080/LoginPage/profile.html';
       }else{
           let error_inputs=document.querySelectorAll(".js-errors");
           for (let i = 0; i < error_inputs.length; i++) {

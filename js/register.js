@@ -44,7 +44,7 @@ const myaction = {
     if(obj.success)
     {
         alert("Profile Created Successfully !!");
-        window.location.href= 'http://localhost:8080/LoginPage/loginhtml.php';//********
+        window.location.href= 'http://localhost:8080/LoginPage/login.html';//********
     }else{
         let error_inputs=document.querySelectorAll(".js-errors");
         for (let i = 0; i < error_inputs.length; i++) {
