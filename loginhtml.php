@@ -18,6 +18,7 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
+    <script src="./js/login.js" defer ></script>
   </head>
   <body>
     <div class="row col-lg-4 col-md-8 mx-auto mt-5 border rounded shadow-lg p-2 login">
@@ -25,22 +26,21 @@
         <h1>Login</h1>
       </div>
       <div class="mx-auto" style="max-width: 400px">
-        <form>
+        <form method="post" onsubmit="myaction.collect_data(event,'login');">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label"
               >Email address</label
             >
-            <input type="email" class="form-control" id="userMail" />
-            <div id="emailHelp" class="form-text">
-              We'll never share your email with anyone else.
-            </div>
+            <input type="email" class="form-control" id="userMail" name="email" />
+            <div  class="form-text text-danger js-errors js-error-email"></div>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" />
+            <input type="password" class="form-control" id="password" name="password" />
+            <div  class="form-text text-danger js-errors js-error-password"></div>
           </div>
           <div class="mb-3">
-            <a href="registerhtml.php"><p>Don'i Have Account !</p></a><!--**********-->
+            <a href="registerhtml.php"><p>Don't Have Account !</p></a><!--**********-->
           </div>
           <div class="progress mb-3 d-none">
             <div

@@ -7,7 +7,8 @@ if (!empty($_POST['data_type'])) {
     // validating form
 
     // firstName 
-    if ($_POST['data_type'] == "signup") {
+    if ($_POST['data_type'] == "signup") 
+    {
         if (empty($_POST['firstName'])) {
             $info['errors']['firstName'] = "A firstname is required";
         } else if (!preg_match("/^[\p{L}]+$/", $_POST['firstName'])) {
@@ -60,9 +61,9 @@ if (!empty($_POST['data_type'])) {
             $arr['lastName'] = $_POST['lastName'];
             $arr['email'] = $_POST['email'];
             $arr['gender'] = $_POST['gender'];
-            $arr['password'] = $_POST['password'];
+            $arr['password'] = password_hash($_POST['password'],PASSWORD_DEFAULT );
             $arr['date'] = date("y-m-d H:i:s");
-            db_query("insert into user(firstName,lastName,email,gender,password) values(:firstName,:lastName,:email,:gender,:password)", $arr);
+            db_query("insert into users(firstName,lastName,email,gender,password,date) values(:firstName,:lastName,:email,:gender,:password,:date)", $arr);
             $info['success'] = true;
         }
     }
