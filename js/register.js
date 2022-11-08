@@ -3,15 +3,17 @@ const myaction = {
     e.preventDefault();
     e.stopPropagation();
     var inputs = document.querySelectorAll("form input ,form select");
-
+    // creating new instance 
     let myform = new FormData();
     myform.append('data_type',data_type);
     for (let i = 0; i < inputs.length; i++) {
       myform.append(inputs[i].name, inputs[i].value);
     }
+    // sending the collected data
     myaction.send_data(myform);
   },
   send_data: function (form) {
+    // created new object - XMLHttpRequest
     var ajax = new XMLHttpRequest();
     document.querySelector(".progress").classList.remove("d-none");
     // reset progress bar
@@ -20,6 +22,7 @@ const myaction = {
         "Working..0%";
     ajax.addEventListener("readystatechange", function () {
       if (ajax.readyState == 4) {
+        // The request is completed and response is ready
         if (ajax.status == 200) {
           //all are fine
           myaction.handle_result(ajax.responseText);
@@ -35,7 +38,9 @@ const myaction = {
       document.querySelector(".progress-bar").innerHTML =
         "Working" + percent + "%";
     });
-    ajax.open("post", "./php/register.php", true);//**********
+    // Type of request
+    ajax.open("post", "./php/register.php", true);
+    // POST request
     ajax.send(form);
   },
   handle_result:function(result){
@@ -44,8 +49,10 @@ const myaction = {
     if(obj.success)
     {
         alert("Profile Created Successfully !!");
-        window.location.href= 'http://localhost:8080/LoginPage/login.html';//********
+        // redirecting to login page
+        window.location.href= 'http://localhost:8080/LoginPage/login.html';
     }else{
+      // handel errors
         let error_inputs=document.querySelectorAll(".js-errors");
         for (let i = 0; i < error_inputs.length; i++) {
             error_inputs[i].innerHTML="";   

@@ -6,7 +6,7 @@ if (!empty($_POST['data_type']))
     $info['success'] = false;
     $arr = [];
     $arr['email'] = $_POST['email'];
-
+    // fetch from mysqldb
     $row = db_query("select * from users where email =:email limit 1", $arr);
 
     if ($_POST['data_type'] == "login") 

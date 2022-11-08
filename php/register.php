@@ -6,9 +6,9 @@ if (!empty($_POST['data_type'])) {
     $info['success'] = false;
     // validating form
 
-    // firstName 
     if ($_POST['data_type'] == "signup") 
     {
+        // firstName 
         if (empty($_POST['firstName'])) {
             $info['errors']['firstName'] = "A firstname is required";
         } else if (!preg_match("/^[\p{L}]+$/", $_POST['firstName'])) {

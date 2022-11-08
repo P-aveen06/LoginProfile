@@ -1,4 +1,5 @@
 function display_img(file){
+  // collect user data entered in signup form
     var img=document.querySelector(".js-img");
     img.src=URL.createObjectURL(file);
     console.log(URL);
@@ -8,15 +9,17 @@ const myprofileaction = {
       e.preventDefault();
       e.stopPropagation();
       var inputs = document.querySelectorAll("form input ,form select");
-  
+      // creating new instance 
       let myform = new FormData();
       myform.append('data_type',data_type);
       for (let i = 0; i < inputs.length; i++) {
         myform.append(inputs[i].name, inputs[i].value);
       }
+      // sending the collected data
       myprofileaction.send_data(myform);
     },
     send_data: function (form) {
+      // created new object - XMLHttpRequest
       var ajax = new XMLHttpRequest();
       document.querySelector(".progress").classList.remove("d-none");
       // reset progress bar
@@ -25,6 +28,7 @@ const myprofileaction = {
           "Working..0%";
       ajax.addEventListener("readystatechange", function () {
         if (ajax.readyState == 4) {
+          // The request is completed and response is ready
           if (ajax.status == 200) {
             //all are fine
             myprofileaction.handle_result(ajax.responseText);
@@ -40,7 +44,9 @@ const myprofileaction = {
         document.querySelector(".progress-bar").innerHTML =
           "Working" + percent + "%";
       });
-      ajax.open("post", "./php/profile_edit.php", true);//**********
+      // Type of request
+      ajax.open("post", "./php/profile_edit.php", true);
+      // POST request
       ajax.send(form);
     },
     handle_result:function(result){
@@ -49,8 +55,10 @@ const myprofileaction = {
       if(obj.success)
       {
           alert("Profile updated Successfully !!");
+          // redirecting to login page
           window.location.href= 'http://localhost:8080/LoginPage/login.html';
       }else{
+        // handel errors
           let error_inputs=document.querySelectorAll(".js-errors");
           for (let i = 0; i < error_inputs.length; i++) {
               error_inputs[i].innerHTML="";   

@@ -1,10 +1,11 @@
 <?php
 session_start();
+// query to the database
 function db_query(string $query, array $data = array())
 {
 	$string = "mysql:hostname=localhost;dbname=profile_db";
 	$con = new PDO($string, 'root', '');
-
+	// mysql prepared statements
 	$stm = $con->prepare($query);
 	$check = $stm->execute($data);
 
@@ -28,12 +29,12 @@ function redirect($path): void
 	header("Location: $path");
 	die;
 }
-
+// specialchars to string
 function esc($str): string
 {
 	return htmlspecialchars($str);
 }
-
+// profile image
 function get_image($path = ''): string
 {
 	if (file_exists($path)) {
