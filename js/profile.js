@@ -3,7 +3,7 @@ function display_img(file){
     img.src=URL.createObjectURL(file);
     console.log(URL);
 }
-const myaction = {
+const myprofileaction = {
     collect_data: function (e,data_type) {
       e.preventDefault();
       e.stopPropagation();
@@ -14,7 +14,7 @@ const myaction = {
       for (let i = 0; i < inputs.length; i++) {
         myform.append(inputs[i].name, inputs[i].value);
       }
-      myaction.send_data(myform);
+      myprofileaction.send_data(myform);
     },
     send_data: function (form) {
       var ajax = new XMLHttpRequest();
@@ -27,7 +27,7 @@ const myaction = {
         if (ajax.readyState == 4) {
           if (ajax.status == 200) {
             //all are fine
-            myaction.handle_result(ajax.responseText);
+            myprofileaction.handle_result(ajax.responseText);
           } else {
             console.log(ajax);
             alert("There is an error !!!");
@@ -40,16 +40,16 @@ const myaction = {
         document.querySelector(".progress-bar").innerHTML =
           "Working" + percent + "%";
       });
-      ajax.open("post", "./php/register.php", true);//**********
+      ajax.open("post", "./php/profile_edit.php", true);//**********
       ajax.send(form);
     },
     handle_result:function(result){
-      console.log(result);
-      var obj= JSON.parse(result);
+        console.log(result);
+        var obj= JSON.parse(result);
       if(obj.success)
       {
-          alert("Profile Created Successfully !!");
-          window.location.href= 'http://localhost:8080/LoginPage/login.html';//********
+          alert("Profile updated Successfully !!");
+          window.location.href= 'http://localhost:8080/LoginPage/login.html';
       }else{
           let error_inputs=document.querySelectorAll(".js-errors");
           for (let i = 0; i < error_inputs.length; i++) {

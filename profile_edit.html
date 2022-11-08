@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n"
+      crossorigin="anonymous"
+    />
+    <script src="./js/profile.js" defer></script>
+    <!-- <script src="./js/register.js" defer></script> -->
+  </head>
+
+  <body>
+    <?php 
+    require "./php/profile.php";
+    ?>
+    <?php if (!empty($row)) : ?>
+    <div class="row col-lg-8 mx-auto mt-5 border rounded shadow-lg p-2 pofile">
+      <div class="profile-image col-md-4 text-center">
+        <img
+          src="<?php echo get_image($row['image']) ?>"
+          alt="Profile img"
+          style="width: 180px; height: 180px; object-fit: cover"
+          class="js-img border rounded img-fluid mb-4"
+        />
+        <div>
+          <div class="mb-3">
+            <input
+              class="js-img form-control"
+              type="file"
+              id="formFile"
+              onchange="display_img(this.files[0])"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 user_detail">
+        <div class="h2">User Profile</div>
+        <form
+          method="post"
+          onsubmit="myprofileaction.collect_data(event,'profile_edit');"
+        >
+          <table class="table table-striped">
+            <tr>
+              <th colspan="2" class="h4">Details :</th>
+            </tr>
+            <tr>
+              <th><i class="bi bi-person-circle"></i> First Name</th>
+              <td id="firstName">
+                <input
+                  value="<?= $row['firstName'] ?>"
+                  type="text"
+                  class="from-control"
+                  placeholder="First Name"
+                />
+                <div
+                  class="form-text text-danger js-errors js-error-fisrtName"
+                >
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th><i class="bi bi-person-circle"></i> Last Name</th>
+              <td id="lastName">
+                <input
+                  value="<?= $row['lastName'] ?>"
+                  type="text"
+                  class="from-control"
+                  placeholder="Last Name"
+                />
+                <div
+                  class="form-text text-danger js-errors js-error-lastName"
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <th><i class="bi bi-envelope"></i> User Email</th>
+              <td id="email">
+                <input
+                  value="<?= $row['email'] ?>"
+                  type="email"
+                  class="from-control"
+                  placeholder="Email"
+                />
+                <div
+                  class="form-text text-danger js-errors js-error-email"
+                ></div>
+
+              </td>
+            </tr>
+            <tr>
+              <th><i class="bi bi-phone"></i> Phone Number</th>
+              <td id="phoneNumber">
+                <input
+                  value="<?= $row['phoneNumber'] ?>"
+                  type="number"
+                  class="from-control"
+                  placeholder="Phone Number"
+                />
+                <div
+                  class="form-text text-danger js-errors js-error-phoneNumber"
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <th><i class="bi bi-gender-ambiguous"></i> Gender</th>
+              <td id="gender">Male</td>
+              <div
+                class="form-text text-danger js-errors js-error-gender"
+              ></div>
+            </tr>
+          </table>
+          <div class="progress mb-3 d-none">
+            <div class="progress-bar" role="progressbar" style="width: 25%">
+              Loading...25%
+            </div>
+          </div>
+          <div>
+            <a href="./profile.html"
+              ><button class="mx-auto btn btn-sm btn-info m-3">Back</button>
+            </a>
+            <button class="mx-auto btn btn-sm btn-primary m-3">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <?php else : ?>
+    <div class="text-center alert alert-danger">The Profile Not found</div>
+    <a href="index.html"><button class="btn btn-primary m-3">Home</button></a>
+    <?php endif; ?>
+  </body>
+</html>

@@ -42,14 +42,7 @@ function get_image($path = ''): string
 
 	return './assets/no_profile.png';
 }
-function get_image_edit($path = ''): string
-{
-	if (file_exists($path)) {
-		return $path;
-	}
 
-	return '../assets/no_profile.png';
-}
 
 function user(string $key = '')
 {
