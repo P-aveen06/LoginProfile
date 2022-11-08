@@ -61,9 +61,10 @@ if (!empty($_POST['data_type'])) {
             $arr['lastName'] = $_POST['lastName'];
             $arr['email'] = $_POST['email'];
             $arr['gender'] = $_POST['gender'];
+            $arr['phoneNumber'] = $_POST['phoneNumber'];
             $arr['password'] = password_hash($_POST['password'],PASSWORD_DEFAULT );
             $arr['date'] = date("y-m-d H:i:s");
-            db_query("insert into users(firstName,lastName,email,gender,password,date) values(:firstName,:lastName,:email,:gender,:password,:date)", $arr);
+            db_query("insert into users(firstName,lastName,email,gender,password,phoneNumber,date) values(:firstName,:lastName,:email,:gender,:password,:phoneNumber,:date)", $arr);
             $info['success'] = true;
         }
     }

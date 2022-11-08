@@ -1,4 +1,5 @@
 <?php
+session_start();
 function db_query(string $query, array $data = array())
 {
 	$string = "mysql:hostname=localhost;dbname=profile_db";
@@ -7,14 +8,56 @@ function db_query(string $query, array $data = array())
 	$stm = $con->prepare($query);
 	$check = $stm->execute($data);
 
-	if($check)
-	{
+	if ($check) {
 		$res = $stm->fetchAll(PDO::FETCH_ASSOC);
-		if(is_array($res) && !empty($res))
-		{
+		if (is_array($res) && !empty($res)) {
 			return $res;
-		} 
+		}
 	}
-
+	return false;
+}
+function is_logged_in(): bool
+{
+	if (!empty($_SESSION['PROFILE'])) {
+		return true;
+	}
+	return false;
+}
+function redirect($path): void
+{
+	header("Location: $path");
+	die;
 }
 
+function esc($str): string
+{
+	return htmlspecialchars($str);
+}
+
+function get_image($path = ''): string
+{
+	if (file_exists($path)) {
+		return $path;
+	}
+
+	return './assets/no_profile.png';
+}
+function get_image_edit($path = ''): string
+{
+	if (file_exists($path)) {
+		return $path;
+	}
+
+	return '../assets/no_profile.png';
+}
+
+function user(string $key = '')
+{
+	if (is_logged_in()) {
+		if (!empty($_SESSION['PROFILE'][$key])) {
+			return $_SESSION['PROFILE'][$key];
+		}
+	}
+
+	return false;
+}

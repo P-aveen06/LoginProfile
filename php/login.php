@@ -18,6 +18,7 @@ if (!empty($_POST['data_type']))
             if (password_verify($_POST['password'], $row['password'])) {
                 // password verified
                 $info['success'] = true;
+                $_SESSION['PROFILE']=$row;
             } else {
                 $info['errors']['email'] = "Wrong email or Password";
             }
